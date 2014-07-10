@@ -14,23 +14,24 @@ function [XList,YList]=T(S,GL,r)
     TFSkew=TFSkew';
     [X,J]=sort(TFSkew);
     n=1;
-    for i=2:126
+    nmax = size(X, 1);
+    for i=2:nmax
         if (X(i)/X(1) >= r)
             n=n+1;
         end
     end
     m=1;
-    for j=1:125-n
-        if (X(126-j)/X(126) >= r)
+    for j=1:nmax-n
+        if (X(nmax+1-j)/X(nmax) >= r)
             m=m+1;
         end
     end
     
     %size(TFSkew)
-    XList=(flipud(J((size(S,2)+1-n):size(S,2))))';
+    XList=(flipud(J((size(S,2)+1-m):size(S,2))))';
     %display('----');
     %flipud((horzcat(J((size(S,2)-1-n):size(S,2)-n),X((size(S,2)-1-n):(size(S,2)-n)))))
-    YList=(J(1:m))';
+    YList=(J(1:n))';
     %display('----');
     %(horzcat(J(m+1:m+2),X(m+1:m+2)))
 end
